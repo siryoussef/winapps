@@ -288,7 +288,7 @@ If you already have a Windows VM or server you wish to use with WinApps, you wil
 Install the required dependencies.
   - Debian/Ubuntu:
       ```bash
-      sudo apt install -y dialog freerdp3-x11 iproute2 libnotify-bin netcat
+      sudo apt install -y dialog freerdp3-x11 iproute2 libnotify-bin netcat-openbsd
       ```
   - Fedora/RHEL:
       ```bash
@@ -296,8 +296,7 @@ Install the required dependencies.
       ```
   - Arch Linux:
       ```bash
-      sudo pacman -Syu --needed -y dialog freerdp iproute2 libnotify
-      gnu-netcat
+      sudo pacman -Syu --needed -y dialog freerdp iproute2 libnotify gnu-netcat
       ```
   - Gentoo Linux:
       ```bash
@@ -305,12 +304,12 @@ Install the required dependencies.
       ```
 
 > [!NOTE]
-> WinApps requires `FreeRDP` version 3 or later. If not available for your distribution through your package manager, you can install the [Flatpak](https://flathub.org/apps/com.freerdp.FreeRDP).
-
-```bash
-flatpak install flathub com.freerdp.FreeRDP
-sudo flatpak override --filesystem=home com.freerdp.FreeRDP # To use `+home-drive`
-```
+> WinApps requires `FreeRDP` version 3 or later. If not available for your distribution through your package manager, you can install the [Flatpak](https://flathub.org/apps/com.freerdp.FreeRDP):
+> ```bash
+> flatpak install flathub com.freerdp.FreeRDP
+> sudo flatpak override --filesystem=home com.freerdp.FreeRDP # To use `+home-drive`
+> ```
+> However, if you have weird issues like [#233](https://github.com/winapps-org/winapps/issues/233) when running Flatpak, please compile FreeRDP from source according to [this guide](https://github.com/FreeRDP/FreeRDP/wiki/Compilation).
 
 ### Step 3: Create a WinApps Configuration File
 Create a configuration file at `~/.config/winapps/winapps.conf` containing the following:
@@ -365,9 +364,9 @@ WAFLAVOR="docker"
 RDP_SCALE="100"
 
 # [ADDITIONAL FREERDP FLAGS & ARGUMENTS]
-# DEFAULT VALUE: '' (BLANK)
+# DEFAULT VALUE: '/cert:tofu /sound /microphone'
 # VALID VALUES: See https://github.com/awakecoding/FreeRDP-Manuals/blob/master/User/FreeRDP-User-Manual.markdown
-RDP_FLAGS=""
+RDP_FLAGS="/cert:tofu /sound /microphone"
 
 # [MULTIPLE MONITORS]
 # NOTES:
