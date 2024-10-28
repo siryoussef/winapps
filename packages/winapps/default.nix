@@ -13,6 +13,9 @@
   libnotify,
   netcat,
   iproute2,
+  git,
+  curl,
+
   ...
 }:
 let
@@ -37,6 +40,8 @@ stdenv.mkDerivation rec {
     dialog
     netcat
     iproute2
+    git
+    curl
   ];
 
   patches = [
