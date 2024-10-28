@@ -50,6 +50,37 @@
      fi
  
      # Silently change the working directory.
+@@ -350,29 +350,13 @@
+         APP_PATH="$USER_APP_PATH"
+         APPDATA_PATH="$USER_APPDATA_PATH"
+     elif [ "$OPT_SYSTEM" -eq 1 ]; then
+-        SUDO="sudo"
++        SUDO=""
+         SOURCE_PATH="$SYS_SOURCE_PATH"
+         BIN_PATH="$SYS_BIN_PATH"
+         APP_PATH="$SYS_APP_PATH"
+         APPDATA_PATH="$SYS_APPDATA_PATH"
+
+-        # Preemptively obtain superuser privileges.
+-        sudo -v || {
+-            # Display the error type.
+-            echo -e "${ERROR_TEXT}ERROR:${CLEAR_TEXT} ${BOLD_TEXT}AUTHENTICATION FAILURE.${CLEAR_TEXT}"
+
+-            # Display the error details.
+-            echo -e "${INFO_TEXT}Failed to gain superuser privileges.${CLEAR_TEXT}"
+-
+-            # Display the suggested action(s).
+-            echo "--------------------------------------------------------------------------------"
+-            echo "Please check your password and try again."
+-            echo "If you continue to experience issues, contact your system administrator."
+-            echo "--------------------------------------------------------------------------------"
+-
+-            # Terminate the script.
+-            return "$EC_NO_SUDO"
+-        }
+     fi
+ }
+
 @@ -385,7 +385,7 @@ function waCheckExistingInstall() {
  
          # Display the suggested action(s).
